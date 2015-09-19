@@ -26,6 +26,8 @@ use yii\helpers\FileHelper;
  */
 class Message extends BaseMessage
 {
+    public $response;
+
     const LANGUAGE_MAILCHIMP = 'mailchimp';
     const LANGUAGE_HANDLEBARS = 'handlebars';
 
@@ -631,7 +633,7 @@ class Message extends BaseMessage
     public function setHtmlBody($html)
     {
         if (is_string($html)) {
-            $this->_html = HtmlPurifier::process($html);
+            $this->_html = $html;
         }
 
         return $this;

@@ -13,7 +13,6 @@ namespace nickcv\mandrill;
 
 use yii\mail\BaseMailer;
 use yii\base\InvalidConfigException;
-use nickcv\mandrill\Message;
 use Mandrill;
 use Mandrill_Error;
 
@@ -171,7 +170,7 @@ class Mailer extends BaseMailer
         try {
             if ($this->useMandrillTemplates) {
                 return $this->wasMessageSentSuccesfully(
-                    $this->_mandrill->messages->sendTemplate(
+                    $message->response = $this->_mandrill->messages->sendTemplate(
                         $message->getTemplateName(),
                         $message->getTemplateContent(),
                         $message->getMandrillMessageArray(),
@@ -180,7 +179,7 @@ class Mailer extends BaseMailer
                 );
             } else {
                 return $this->wasMessageSentSuccesfully(
-                    $this->_mandrill->messages->send(
+                    $message->response = $this->_mandrill->messages->send(
                         $message->getMandrillMessageArray(),
                         $message->isAsync()
                     )
